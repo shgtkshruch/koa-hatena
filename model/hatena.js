@@ -1,12 +1,17 @@
 var monk = require('monk');
 var wrap = require('co-monk');
+var db, bookmarks;
 
-var db = monk('localhost/hatena');
-var bookmarks = wrap(db.get('bookmarks'));
+
+function connect () {
+  db = monk('localhost/hatena');
+  bookmarks = wrap(db.get('bookmarks'));
+}
 
 module.exports = {
 
   save: function *(hbs) {
+    connect();
 
     yield bookmarks.remove({});
 
@@ -16,6 +21,16 @@ module.exports = {
     console.log(res);
 
     db.close();
+  },
+
+  find: function *(hbs) {
+    connect();
+
+    var res = yield bookmarks.find({});
+
+    db.close();
+
+    return res;
   }
 
 };

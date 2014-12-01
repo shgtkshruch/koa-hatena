@@ -1,0 +1,15 @@
+table.main
+  - for (var i = 0; i < Math.floor(hbs.length / 4); i++) 
+    tr
+      - for (var j = 0; j < 4; j++)
+        td.hb
+          ul.meta
+            li.meta__item.hb__count #{hbs[4 * i + j].hatenaBookmarkCount}
+            li.meta__item.hb__thumb 
+              img(src="http://cdn1.www.st-hatena.com/users/ko/#{hbs[4 * i + j].creator}/profile.gif" width="62" height="62")
+            ul
+              li.meta__item.hb__creator #{hbs[4 * i + j].creator}
+              li.meta__item.hb__date #{hbs[4 * i + j].date}
+          a.hb__title(href="#{hbs[4 * i + j].link}") #{hbs[4 * i + j].title}
+          p.hb__desc #{hbs[4 * i + j].description}
+          p.hb__body #{hbs[4 * i + j].body}
