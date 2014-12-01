@@ -1,0 +1,20 @@
+{
+  "name": "koa-hatena",
+  "version": "0.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon --harmony index.js"
+  },
+  "dependencies": {
+    "co": "^4.0.1",
+    "co-monk": "^1.0.0",
+    "co-views": "^0.2.0",
+    "jade": "^1.8.0",
+    "koa": "^0.13.0",
+    "koa-router": "^3.7.0",
+    "koa-static": "^1.4.7",
+    "koa-stylus": "^0.0.3",
+    "monk": "^0.9.1",
+    "nodemon": "^1.2.1"
+  }
+}
