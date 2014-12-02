@@ -2,10 +2,16 @@ var body = document.querySelector('body');
 var hbs = document.querySelector('.main');
 
 // When hb items click, show article description.
-hbs.addEventListener('click', showDesc);
-
-function showDesc (e) {
+hbs.addEventListener('click', function (e) {
   var el = e.target;
+  if (el.classList.contains('hb__count')) {
+    suspend(el);
+  } else {
+    showDescription(el);
+  }
+});
+
+function showDescription (el) {
 
   while(!el.classList.contains('hb')) {
     el = el.parentNode;
@@ -35,4 +41,12 @@ function showDesc (e) {
       hbs.removeChild(clone);
     }
   }
+}
+
+function suspend (el) {
+  var title = el.parentNode.nextSibling.textContent;
+  var req = new XMLHttpRequest();
+  req.open('GET', '/suspend', true);
+  req.setRequestHeader('title', encodeURI(title));
+  req.send();
 }

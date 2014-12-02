@@ -14,20 +14,20 @@ var insert = thunkify(function (db, data, cb) {
   });
 });
 
-var find = thunkify(function (db, cb) {
-  db.collection(dbName).find({}).sort({date: -1}).toArray(function (err, docs) {
+var find = thunkify(function (db, query, cb) {
+  db.collection(dbName).find(query).sort({date: 1}).toArray(function (err, docs) {
     cb(err, docs);
   });
 });
 
-var remove = thunkify(function (db, cb) {
-  db.collection(dbName).remove({}, function (err, res) {
+var remove = thunkify(function (db, query, cb) {
+  db.collection(dbName).remove(query, function (err, res) {
     cb(err, res);
   });
 });
 
 var count = thunkify(function (db, cb) {
-  db.collection(dbName).count(function (err, res) {
+  db.collection(dbName).count({}, function (err, res) {
     cb(err, res);
   });
 });
@@ -36,7 +36,7 @@ module.exports = {
   save: function *(hbs) {
     var db = yield connect();
 
-    yield remove(db);
+    yield remove(db, {});
 
     yield insert(db, hbs);
 
@@ -46,11 +46,23 @@ module.exports = {
   find: function *() {
     var db = yield connect();
 
-    var res = yield find(db);
+    var res = yield find(db, {});
 
     db.close();
 
     return res;
+  },
+
+  remove: function *(title) {
+    var db = yield connect();
+
+    var res = yield find(db, {title: title});
+
+    if (res.length !== 0) {
+      yield remove(db, {date: {$lte: res[0].date}});
+    }
+
+    db.close();
   }
 };
 

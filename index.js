@@ -28,4 +28,10 @@ app.get('/', function *() {
   this.body = yield render('index', {hbs: hbs});
 });
 
+app.get('/suspend', function *() {
+  var title = decodeURI(this.get('title'));
+  yield hatena.remove(title);
+  this.body = 200;
+});
+
 app.listen(3000);
