@@ -15,7 +15,14 @@ var insert = thunkify(function (db, data, cb) {
 });
 
 var find = thunkify(function (db, query, cb) {
-  db.collection(dbName).find(query).sort({date: 1}).toArray(function (err, docs) {
+  db.collection(dbName).find(query).sort({date: 1}).limit(25).toArray(function (err, docs) {
+    cb(err, docs);
+  });
+});
+
+var newest = thunkify(function (db, cb) {
+  db.collection(dbName).find({}, {title: 1, date: 1}).sort({date: -1}).limit(1).toArray(function (err, docs) {
+    console.log('new');
     cb(err, docs);
   });
 });
@@ -36,17 +43,27 @@ module.exports = {
   save: function *(hbs) {
     var db = yield connect();
 
-    yield remove(db, {});
+    // yield remove(db, {});
 
     yield insert(db, hbs);
 
     db.close();
   },
 
-  find: function *() {
+  find: function *(query) {
     var db = yield connect();
 
-    var res = yield find(db, {});
+    var res = yield find(db, query);
+
+    db.close();
+
+    return res;
+  },
+
+  newest: function *() {
+    var db = yield connect();
+
+    var res = yield newest(db);
 
     db.close();
 
