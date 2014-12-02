@@ -37,8 +37,8 @@ app.get('/suspend', function *() {
 
 app.get('/reload', function *() {
   var newest = yield db.newest();
-  // var newest = 1417507368000;//yield db.newest();
-  yield hatena(newest[0].date);
+  var n = yield hatena(newest[0].date);
+  this.body = 'Add ' + n + 'bookmarks';
 });
 
 app.listen(3000);

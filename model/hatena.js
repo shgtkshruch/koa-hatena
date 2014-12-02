@@ -22,7 +22,6 @@ var find = thunkify(function (db, query, cb) {
 
 var newest = thunkify(function (db, cb) {
   db.collection(dbName).find({}, {title: 1, date: 1}).sort({date: -1}).limit(1).toArray(function (err, docs) {
-    console.log('new');
     cb(err, docs);
   });
 });
