@@ -5,6 +5,7 @@ var serve = require('koa-static');
 var stylus = require('koa-stylus');
 var router = require('koa-router');
 
+var moment = require('./lib/moment');
 var hatena = require('./model/hatena');
 
 var render = views('views', {
@@ -19,6 +20,11 @@ app.use(serve('public'));
 
 app.get('/', function *() {
   var hbs = yield hatena.find();
+
+  hbs.forEach(function (hb) {
+    hb.date = moment.fromNow(hb.date);
+  });
+
   this.body = yield render('index', {hbs: hbs});
 });
 
