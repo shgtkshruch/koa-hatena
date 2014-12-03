@@ -4,16 +4,21 @@ ol.main
       - var body = 'with-body'
     else
       - var body = ''
+
     li(class="hb #{body}")
-      ul.meta
-        li.meta__item.hb__count #{hb.hatenaBookmarkCount}
-        li.meta__item.hb__thumb 
-          img(src="http://cdn1.www.st-hatena.com/users/ko/#{hb.creator}/profile.gif" width="62" height="62")
-        ul
-          li.meta__item.hb__creator #{hb.creator}
-          li.meta__item.hb__date #{hb.date}
-      a.hb__title(href="#{hb.link}" target="_blank") #{hb.title}
-      if hb.description
-        p.hb__desc #{hb.description}
-      if hb.body
-        p.hb__body #{hb.body}
+      .hb__wrap
+        .hb__header
+          img.hb__thumb(src="http://cdn1.www.st-hatena.com/users/ko/#{hb.creator}/profile.gif" width="62" height="62")
+          span.hb__user #{hb.creator}
+          span.hb__date #{hb.date}
+
+        .hb__content
+          a.hb__title(href="#{hb.link}" target="_blank") #{hb.title}
+          if hb.description
+            p.hb__desc #{hb.description}
+          if hb.body
+            p.hb__body #{hb.body}
+
+        .hb__footer
+          p.hb__count #{hb.hatenaBookmarkCount}
+

@@ -27,7 +27,7 @@ p {
   margin-bottom: 0;
 }
 .main {
-  width: 90%;
+  width: 48em;
   margin: 0 auto;
   border-collapse: collapse;
 }
@@ -36,40 +36,42 @@ p {
 }
 .hb {
   position: relative;
-  width: 100%;
-  padding: 1.8em 0;
+  padding: 1.3em 0;
   background-color: #fff;
   border-bottom: 1px solid #eee;
 }
+.hb__wrap {
+  margin-left: 76px;
+}
 .hb.with-body:after {
   position: absolute;
-  top: 4em;
-  right: 0;
-  width: 1em;
-  height: 1em;
-  background-color: #bbe9f3;
+  top: 0.4em;
+  right: 0.4em;
+  width: 0.3em;
+  height: 0.3em;
+  background-color: #fff;
   content: '';
   border-radius: 50%;
 }
 .hb__title {
-  font-size: 1.5em;
+  font-size: 1.2em;
   display: inline-block;
-  margin-top: 0.8em;
   line-height: 1.2;
   font-weight: bold;
   text-decoration: none;
   color: #03b5e5;
 }
 .hb__count {
-  font-size: 20px;
-  display: block;
-  width: 62px;
-  height: 62px;
+  font-size: 16px;
+  font-weight: 100;
+  width: 4em;
+  height: 2em;
+  line-height: 2em;
   margin: 0;
   text-align: center;
   color: #fff;
   background-color: #2ecbf5;
-  border-radius: 50%;
+/* border-radius: 0% 0% 50% 50%; */
   cursor: pointer;
 }
 .hb__thumb > img {
@@ -88,7 +90,6 @@ p {
   font-size: 15px;
   height: 0;
   line-height: 1.7;
-  margin: 1em 0 -1em;
   opacity: 0;
   transition: 0.5s;
   transition-property: height, opacity;
@@ -100,6 +101,11 @@ p {
 }
 .hb__creator {
   font-size: 18px;
+}
+.hb__footer {
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 .meta {
   font-size: 15px;
@@ -120,10 +126,9 @@ p {
   margin-left: 0.5em;
 }
 .cmts {
-  position: fixed;
-  top: 9em;
-  right: 4em;
-  width: 22em;
+  position: absolute;
+  right: 3em;
+  width: 26em;
 }
 .comment {
   margin: 0;
@@ -136,7 +141,7 @@ p {
 }
 .hbc__meta {
   overflow: hidden;
-  color: #B5B5B5;
+  color: #b5b5b5;
 }
 .hbc__meta > li {
   float: left;
@@ -144,9 +149,10 @@ p {
 }
 .wrap {
   overflow-y: scroll;
+  overflow-x: hidden;
   height: calc(60vh);
-  margin-top: 2.5em;
   padding-right: 0.5em;
+  margin-top: -0.3em;
 }
 .wrap + .cmts__close {
   display: block;
@@ -154,8 +160,8 @@ p {
 .cmts__close {
   display: none;
   position: absolute;
-  top: 0;
-  left: 0;
+  top: -2.5em;
+  left: -0.5em;
   height: 2em;
   width: 2em;
   margin-bottom: 0.5em;
@@ -177,10 +183,19 @@ p {
 .cmts__close:after {
   transform: translate(-50%, -50%) rotate(-45deg);
 }
+.hb__thumb {
+  float: left;
+  margin-left: -76px;
+  margin-top: -4px;
+}
+.hb__user {
+  position: relative;
+  margin: 0 0.6em 0 0;
+}
+.hb__date {
+  margin: 0;
+}
 @media (min-width: 46em) {
-  .main {
-    width: 46em;
-  }
 }
 @media (min-width: 1820px) {
 }
