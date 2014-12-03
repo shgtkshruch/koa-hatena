@@ -119,6 +119,64 @@ p {
   display: inline-block;
   margin-left: 0.5em;
 }
+.cmts {
+  position: fixed;
+  top: 9em;
+  right: 4em;
+  width: 22em;
+}
+.comment {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.4;
+}
+.hbc {
+  margin-bottom: 0.7em;
+  font-size: 12px;
+}
+.hbc__meta {
+  overflow: hidden;
+  color: #B5B5B5;
+}
+.hbc__meta > li {
+  float: left;
+  margin-right: 1em;
+}
+.wrap {
+  overflow-y: scroll;
+  height: calc(60vh);
+  margin-top: 2.5em;
+  padding-right: 0.5em;
+}
+.wrap + .cmts__close {
+  display: block;
+}
+.cmts__close {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 2em;
+  width: 2em;
+  margin-bottom: 0.5em;
+  cursor: pointer;
+}
+.cmts__close:before,
+.cmts__close:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background-color: #000;
+  width: 1px;
+  height: 1.5em;
+}
+.cmts__close:before {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+.cmts__close:after {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
 @media (min-width: 46em) {
   .main {
     width: 46em;

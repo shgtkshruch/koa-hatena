@@ -1,11 +1,14 @@
 var body = document.querySelector('body');
 var hbs = document.querySelector('.main');
+var comments = document.querySelector('.cmts');
 
 // When hb items click, show article description.
 hbs.addEventListener('click', function (e) {
   var el = e.target;
-  if (el.classList.contains('hb__count')) {
+  if (el.parentNode.classList.contains('hb__thumb')) {
     suspend(el);
+  } else if (el.classList.contains('hb__count')) {
+    showComment(el);
   } else {
     showDescription(el);
   }
@@ -44,9 +47,69 @@ function showDescription (el) {
 }
 
 function suspend (el) {
-  var title = el.parentNode.nextSibling.textContent;
+  var title = el.parentNode.parentNode.nextSibling.textContent;
   var req = new XMLHttpRequest();
   req.open('GET', '/suspend', true);
   req.setRequestHeader('title', encodeURI(title));
   req.send();
 }
+
+// display bookmark comments
+var close = document.querySelector('.cmts__close');
+
+close.addEventListener('click', closeCmt);
+
+function closeCmt (e) {
+  var el = e.target;
+  comments.removeChild(el.previousSibling);
+}
+
+function loadJS (src) {
+  var script = document.createElement('script');
+  script.src = src;
+  document.body.appendChild(script);
+}
+
+function showComment (el) {
+  var api = 'http://b.hatena.ne.jp/entry/jsonlite/?url=';
+  var url = el.parentNode.nextSibling.href;
+  loadJS(api + encodeURI(url) + '&callback=entryCB');
+  var wrap = document.querySelector('.wrap');
+  if (wrap) {
+    comments.removeChild(wrap);
+  }
+}
+
+var entryCB = function(data){
+  var count = data.count;
+  var wrap = document.createElement('div');
+  wrap.classList.add('wrap');
+
+  data.bookmarks.forEach(function (hb) {
+    if (!hb.comment) return;
+
+    var hbc = document.createElement('div');
+    hbc.classList.add('hbc');
+    var hbc__meta = document.createElement('ul');
+    hbc__meta.classList.add('hbc__meta');
+
+    function appendEl (parent, el, name) {
+      if (!hb[name]) return;
+
+      var node = document.createElement(el);
+      node.textContent = hb[name];
+      node.classList.add(name);
+      parent.appendChild(node);
+    }
+
+    appendEl(hbc__meta, 'li', 'user');
+    appendEl(hbc__meta, 'li', 'timestamp');
+    hbc.appendChild(hbc__meta);
+
+    appendEl(hbc, 'p', 'comment');
+    wrap.appendChild(hbc);
+  });
+
+  comments.insertBefore(wrap, comments.firstChild);
+};
+
