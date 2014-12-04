@@ -1,0 +1,27 @@
+{{#each this}}
+  <li class="hb">
+    <div class="hb__wrap">
+
+      <div class="hb__header">
+        <img class="hb__thumb" src="http://cdn1.www.st-hatena.com/users/ko/{{creator}}/profile.gif" alt="">
+        <span class="hb__user">{{creator}}</span>
+        <span class="hb__date">{{date}}</span>
+      </div>
+
+      <div class="hb__content">
+        <a class="hb__title" href="{{link}}" target="_blank">{{title}}</a>
+        {{#if description}}
+          <p class="hb__desc">{{description}}</p>
+        {{/if}}
+
+        {{#if body}}
+          <p class="hb__body">{{body}}</p>
+        {{/if}}
+      </div>
+
+      <div class="hb__footer">
+        <p class="hb__count">{{hatenaBookmarkCount}}</p>
+      </div>
+    </div>
+  </li>
+{{/each}}

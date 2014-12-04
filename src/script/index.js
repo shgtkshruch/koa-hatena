@@ -1,3 +1,5 @@
+require('./initRendering')();
+
 var hbs = document.querySelector('.main');
 
 hbs.addEventListener('click', function (e) {

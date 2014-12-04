@@ -17,13 +17,17 @@ app.use(router(app));
 app.use(serve('public'));
 
 app.get('/', function *() {
+  this.body = yield render('index');
+});
+
+app.get('/bookmark', function *() {
   var hbs = yield db.find({});
 
   hbs.forEach(function (hb) {
     hb.date = moment.fromNow(hb.date);
   });
 
-  this.body = yield render('index', {hbs: hbs});
+  this.body = hbs;
 });
 
 app.get('/suspend', function *() {
