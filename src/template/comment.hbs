@@ -1,0 +1,11 @@
+{{#each this}}
+  {{#if comment}}
+    <div class="hbc">
+      <ul class="hbc__meta">
+        <li class="user">{{user}}</li>
+        <li class="times">{{timestamp}}</li>
+      </ul>
+      <p class="comment">{{comment}}</p>
+    </div>
+  {{/if}}
+{{/each}}

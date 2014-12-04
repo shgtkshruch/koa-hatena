@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --harmony index.js"
+    "start": "nodemon --harmony index.js",
+    "hbs": "handlebars src/template/*.hbs -f public/script/templates.js"
   },
   "dependencies": {
     "cheerio": "^0.18.0",
@@ -23,6 +24,7 @@
     "gulp": "^3.8.10",
     "gulp-nodemon": "^1.0.4",
     "gulp-sass": "^1.1.0",
+    "handlebars": "^2.0.0",
     "vinyl-source-stream": "^1.0.0"
   }
 }

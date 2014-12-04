@@ -3,6 +3,7 @@ var nodemon = require('gulp-nodemon');
 var browserify = require('browserify');
 var source = require('vinyl-source-stream');
 var sass = require('gulp-sass');
+var handlebars = require('handlebars');
 
 gulp.task('nodemon', function () {
   nodemon({
@@ -17,6 +18,19 @@ gulp.task('nodemon', function () {
       "model/",
       "lib/"
     ]
+  });
+});
+
+gulp.task('template', function () {
+  var spawn = require('child_process').spawn;
+  var hbs = spawn('npm', ['run', 'hbs']);
+
+  hbs.stdout.on('data', function (data) {
+    console.log('handlebars: ' + data);
+  });
+
+  hbs.stderr.on('data', function (data) {
+    console.log('handlebars: ' + data);
   });
 });
 
@@ -38,4 +52,5 @@ gulp.task('style', function () {
 gulp.task('default', ['nodemon'], function () {
   gulp.watch('src/script/**/*.js', ['script']);
   gulp.watch('src/style/**/*.scss', ['style']);
+  gulp.watch('src/template/*.hbs', ['template']);
 });
