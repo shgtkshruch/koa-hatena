@@ -90,7 +90,7 @@ module.exports = {
   remove: function *(id) {
     var db = yield connect();
 
-    var res = yield find(db, {_id: id});
+    var res = yield find(db, {_id: new ObjectId(id)});
 
     if (res.length !== 0) {
       yield remove(db, {date: {$lte: res[0].date}});
