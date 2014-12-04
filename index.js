@@ -21,7 +21,7 @@ app.get('/', function *() {
 });
 
 app.get('/bookmark', function *() {
-  var hbs = yield db.find({});
+  var hbs = yield db.find(this.get('id') || null);
 
   hbs.forEach(function (hb) {
     hb.date = moment.fromNow(hb.date);
@@ -31,14 +31,16 @@ app.get('/bookmark', function *() {
 });
 
 app.get('/suspend', function *() {
-  var title = decodeURI(this.get('title'));
-  yield db.remove(title);
+  var id = this.get('id');
+  yield db.remove(id);
   this.body = 200;
 });
 
 app.get('/reload', function *() {
-  var newest = yield db.newest();
-  var n = yield hatena(newest[0].date);
+  // var newest = yield db.newest();
+  // var n = yield hatena(newest[0].date);
+  var newest = 1417662000000;
+  var n = yield hatena(newest);
   this.body = 'Add ' + n + 'bookmarks';
 });
 

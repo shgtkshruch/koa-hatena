@@ -2,9 +2,10 @@ module.exports = function (el) {
   while(!el.classList.contains('hb')) {
     el = el.parentNode;
   }
-  var title = el.querySelector('.hb__title').textContent;
+  console.log(el.dataset.id);
+  return;
   var req = new XMLHttpRequest();
   req.open('GET', '/suspend', true);
-  req.setRequestHeader('title', encodeURI(title));
+  req.setRequestHeader('id', el.dataset.id);
   req.send();
 };

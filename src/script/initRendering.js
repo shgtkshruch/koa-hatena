@@ -8,6 +8,8 @@ module.exports = function () {
       var data = JSON.parse(this.responseText);
       var res = Handlebars.templates['bookmark.hbs'](data);
       main.innerHTML = res;
+      var event = new Event('render');
+      main.dispatchEvent(event);
     }
   };
   req.send();
