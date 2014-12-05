@@ -17,7 +17,7 @@ app.use(router(app));
 app.use(serve('public'));
 
 app.get('/', function *() {
-  this.body = yield render('index');
+  this.body = yield render('index', {now: moment.now()});
 });
 
 app.get('/bookmark', function *() {
