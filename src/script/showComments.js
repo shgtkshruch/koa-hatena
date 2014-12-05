@@ -13,7 +13,7 @@ function loadJS (src) {
 window.browserify.entryCB = function(data){
   var wrap = document.createElement('div');
 
-  wrap.classList.add('wrap');
+  wrap.classList.add('cmts__wrap');
   wrap.innerHTML = Handlebars.templates['comment.hbs'](data.bookmarks);
 
   comments.insertBefore(wrap, comments.firstChild);
@@ -32,7 +32,7 @@ module.exports = function (el) {
 
 
 
-  var wrap = document.querySelector('.wrap');
+  var wrap = document.querySelector('.cmts__wrap');
   if (wrap) {
     comments.removeChild(wrap);
   }
