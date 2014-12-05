@@ -3,7 +3,7 @@ module.exports = function (el) {
     el = el.parentNode;
   }
   var req = new XMLHttpRequest();
-  req.open('GET', '/suspend', true);
+  req.open('DELETE', '/bookmark', true);
   req.setRequestHeader('id', el.dataset.id);
   req.send();
 };

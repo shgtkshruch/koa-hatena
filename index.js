@@ -30,13 +30,13 @@ app.get('/bookmark', function *() {
   this.body = hbs;
 });
 
-app.get('/suspend', function *() {
+app.del('/bookmark', function *() {
   var id = this.get('id');
   yield db.remove(id);
   this.body = 200;
 });
 
-app.get('/reload', function *() {
+app.post('/bookmark', function *() {
   // var newest = yield db.newest();
   // var n = yield hatena(newest[0].date);
   var newest = 1417662000000;
