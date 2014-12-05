@@ -15,3 +15,4 @@ hbs.addEventListener('click', function (e) {
 
 require('./closeComment')();
 require('./infinityScroll')();
+require('./update')();

@@ -81,7 +81,6 @@ module.exports = {
     var db = yield connect();
 
     var res = yield newest(db);
-
     db.close();
 
     return res;

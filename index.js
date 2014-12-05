@@ -31,17 +31,13 @@ app.get('/bookmark', function *() {
 });
 
 app.del('/bookmark', function *() {
-  var id = this.get('id');
-  yield db.remove(id);
+  yield db.remove(this.get('id'));
   this.body = 200;
 });
 
 app.post('/bookmark', function *() {
-  // var newest = yield db.newest();
-  // var n = yield hatena(newest[0].date);
-  var newest = 1417662000000;
-  var n = yield hatena(newest);
-  this.body = 'Add ' + n + 'bookmarks';
+  yield hatena(this.get('unixTime'));
+  this.body = 200;
 });
 
 app.listen(3000);
