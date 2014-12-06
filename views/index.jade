@@ -10,8 +10,10 @@ html(lang="ja")
     .header
       h1.header__title Hatena Bookmark
       form.date(data-now=now)
-        input.date__pick(type="datetime-local")
-        button.date__btn(type="submit") 更新
+        // データがなかったら、いつからのデータを取得するか指定できる
+        unless db
+          input.date__pick(type="datetime-local")
+        button.date__btn(type="submit") Update
 
     ol.main
 

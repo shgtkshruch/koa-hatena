@@ -17,7 +17,11 @@ app.use(router(app));
 app.use(serve('public'));
 
 app.get('/', function *() {
-  this.body = yield render('index', {now: moment.now()});
+  var newest = yield db.newest();
+  this.body = yield render('index', {
+    now: moment.now(),
+    db: newest.length === 1
+  });
 });
 
 app.get('/bookmark', function *() {
