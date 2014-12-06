@@ -1,4 +1,4 @@
-var _ = require('lodash');
+var Steady = require('steady');
 
 module.exports = function () {
   var main = document.querySelector('.main');
@@ -8,23 +8,18 @@ module.exports = function () {
     bottom = main.offsetTop + main.offsetHeight;
   });
 
-  window.addEventListener('scroll', _.throttle(scroll, 3000));
+  new Steady({
+    conditions: {
+      "max-bottom": 1000
+    },
+    throttle: 200,
+    handler: scroll
+  });
 
-  function scroll (e) {
-    var y = window.scrollY;
-
-    if (bottom - 1500 < y) {
-      insertNewBookmark();
-    }
-  }
-
-  function insertNewBookmark () {
+  function scroll (values, done) {
     var id = main.lastElementChild.dataset.id;
-    request(id);
-  }
-
-  function request (id) {
     var req = new XMLHttpRequest();
+
     req.open('GET', '/bookmark', true);
     req.onreadystatechange = function (e) {
       if (this.status === 200 && this.readyState === 4) {
@@ -35,14 +30,19 @@ module.exports = function () {
           return;
         } 
 
+        // rendering bookmarks
         var res = Handlebars.templates['bookmark.hbs'](data);
         main.innerHTML += res;
+
+        // dispatch render event for notify render is done
+        // to calculate window bottom position.
         var event = new Event('render');
         main.dispatchEvent(event);
+
+        done();
       }
     };
     req.setRequestHeader('id', id);
     req.send();
   }
-
 };
