@@ -9,6 +9,7 @@
   "dependencies": {
     "cheerio": "^0.18.0",
     "co": "^4.0.1",
+    "co-monk": "^1.0.0",
     "co-views": "^0.2.0",
     "cogent": "^1.0.1",
     "jade": "^1.8.0",
@@ -16,7 +17,7 @@
     "koa-router": "^3.7.0",
     "koa-static": "^1.4.7",
     "moment": "^2.8.4",
-    "mongodb": "^1.4.22",
+    "monk": "^0.9.1",
     "steady": "^2.0.1",
     "thunkify": "^2.1.2"
   },
