@@ -9,11 +9,15 @@ html(lang="ja")
 
     .header
       h1.header__title Hatena Bookmark
-      form.date(data-now=now)
-        // データがなかったら、いつからのデータを取得するか指定できる
-        unless db
-          input.date__pick(type="datetime-local")
-        button.date__btn(type="submit") Update
+      .form
+        form.date.form__item(data-now=now)
+          // データがなかったら、いつからのデータを取得するか指定できる
+          unless db
+            input.date__pick(type="datetime-local")
+          button.date__btn(type="submit") Update
+        unless authentication
+          .pocket.form__item
+            button.pocket__btn Pocket
 
     ol.main
 

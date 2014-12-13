@@ -48,9 +48,51 @@ p {
 
 .header {
   width: $width-body;
-  margin: 0 auto;
+  margin: 0 auto 2.5em;
   &__title {
     text-align: center;
+  }
+}
+
+.date {
+  text-align: center;
+  &__pick {
+    border: none;
+    outline: none;
+    font-size: 16px;
+    line-height: 1;
+    text-align: center;
+    vertical-align: middle;
+  }
+  &__btn {
+    @extend %btn;
+    background-color: $color-blue;
+  }
+}
+
+%btn {
+  padding: 0.9em 1.5em;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.form {
+  display: table;
+  width: $width-body;
+  &__item {
+    display: table-cell;
+  }
+}
+
+.pocket {
+  text-align: center;
+  &__btn {
+    @extend %btn;
+    background-color: #FF3498;
   }
 }
 
@@ -233,26 +275,5 @@ p {
     margin-top: 0.5em;
     font-size: 14px;
     line-height: 1.4;
-  }
-}
-
-.date {
-  text-align: center;
-  &__pick {
-    border: none;
-    outline: none;
-    font-size: 16px;
-    line-height: 1;
-    text-align: center;
-    vertical-align: middle;
-  }
-  &__btn {
-    padding: 0.7em 1.2em;
-    color: #fff;
-    background-color: $color-blue;
-    border: none;
-    font-size: 12px;
-    line-height: 1;
-    cursor: pointer;
   }
 }

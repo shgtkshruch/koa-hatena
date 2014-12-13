@@ -20,7 +20,8 @@ app.get('/', function *() {
   var newest = yield db.newest();
   this.body = yield render('index', {
     now: moment.now(),
-    db: newest.length === 1
+    db: newest.length === 1,
+    authentication: false
   });
 });
 
