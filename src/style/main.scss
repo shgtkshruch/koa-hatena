@@ -54,6 +54,20 @@ p {
   }
 }
 
+@mixin btn ($bgc) {
+  padding: 0.9em 1.5em;
+  color: #fff;
+  background-color: $bgc;
+  border: none;
+  border-radius: 3px;
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+  &:hover {
+    background-color: darken($bgc, 10%);
+  }
+}
+
 .date {
   text-align: center;
   &__pick {
@@ -65,19 +79,8 @@ p {
     vertical-align: middle;
   }
   &__btn {
-    @extend %btn;
-    background-color: $color-blue;
+    @include btn($color-blue);
   }
-}
-
-%btn {
-  padding: 0.9em 1.5em;
-  color: #fff;
-  border: none;
-  border-radius: 3px;
-  font-size: 14px;
-  line-height: 1;
-  cursor: pointer;
 }
 
 .form {
@@ -89,10 +92,9 @@ p {
 }
 
 .pocket {
-  text-align: center;
+  text-align: right;
   &__btn {
-    @extend %btn;
-    background-color: #FF3498;
+    @include btn(#FF3498);
   }
 }
 

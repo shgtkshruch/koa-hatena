@@ -46,19 +46,22 @@ app.post('/bookmark', function *() {
   this.body = 200;
 });
 
-app.get('/pocket', function *() {
+var requestToken;
 
+app.get('/pocket/request_token', function *() {
   if (yield db.isAuthenticate()) {
     this.body = 'you have been authentecated';
   } else {
-    var endpoint = 'https://getpocket.com/auth/authorize?request_token=';
-    var redirect_uri = 'pocketapp1234:authorizationFinished';
+    requestToken = yield pocket.requestToken();
 
-    var token = yield pocket.getToken();
-
-    this.body = endpoint + token + '&redirect_uri=' + redirect_uri;
+    var url = pocket.authenticationPageUrl(requestToken);
+    this.body = url;
   }
+});
 
+app.get('/pocket/access_token', function *() {
+  var access_token = yield pocket.accessToken(requestToken);
+  this.body = access_token;
 });
 
 app.listen(3000);
