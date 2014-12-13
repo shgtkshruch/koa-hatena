@@ -3,6 +3,7 @@ var wrap = require('co-monk');
 var db = monk('localhost/hatena');
 
 var bookmarks = wrap(db.get('bookmarks'));
+var pocket = wrap(db.get('pocket'));
 
 module.exports = {
   save: function *(hbs) {
@@ -43,9 +44,13 @@ module.exports = {
     );
   },
 
+  pocketSave: function *(accessToken) {
+    yield pocket.insert(accessToken);
+  },
+
   isAuthenticate: function *() {
-    var pocket = yield bookmarks.find({ name: 'pocket' });
-    return pocket.length === 1 ? true : false;
+    var res = yield pocket.find({ name: 'pocket' });
+    return res.length === 1 ? true : false;
   }
 };
 

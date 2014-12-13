@@ -15,33 +15,35 @@ module.exports = function () {
   var btn = document.getElementById('js-request');
   var a;
 
-  btn.addEventListener('click', function (e) {
-    e.preventDefault();
+  if (btn) {
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
 
-    if (haveNoteToken) {
-      request('pocket/request_token', function (response) {
+      if (haveNoteToken) {
+        request('pocket/request_token', function (response) {
 
-        btn.textContent = 'Get Access Token';
-        btn.style.display = 'none';
+          btn.textContent = 'Get Access Token';
+          btn.style.display = 'none';
 
-        a = document.createElement('a');
-        a.classList.add('pocket__btn');
-        a.href = response.response;
-        a.textContent = 'Open New Tab';
-        a.target = '_blank';
-        a.addEventListener('click', function (e) {
-          haveNoteToken = false;
-          a.style.display = 'none';
-          btn.style.display = 'table-cell';
+          a = document.createElement('a');
+          a.classList.add('pocket__btn');
+          a.href = response.response;
+          a.textContent = 'Open New Tab';
+          a.target = '_blank';
+          a.addEventListener('click', function (e) {
+            haveNoteToken = false;
+            a.style.display = 'none';
+            btn.style.display = 'table-cell';
+          });
+
+          btn.parentNode.appendChild(a);
         });
 
-        btn.parentNode.appendChild(a);
-      });
-
-    } else {
-      request('pocket/access_token', function (response) {
-        console.log('access token: ' + response.response);
-      });
-    }
-  });
+      } else {
+        request('pocket/access_token', function (response) {
+          console.log(response.status);
+        });
+      }
+    });
+  }
 };

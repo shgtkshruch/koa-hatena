@@ -15,7 +15,7 @@ html(lang="ja")
           unless db
             input.date__pick(type="datetime-local")
           button.date__btn(type="submit") Update
-        unless authentication
+        unless isAuthentication
           .pocket.form__item
             button.pocket__btn#js-request Get Request Token
 

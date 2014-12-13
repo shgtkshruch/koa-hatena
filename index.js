@@ -22,7 +22,7 @@ app.get('/', function *() {
   this.body = yield render('index', {
     now: moment.now(),
     db: newest.length === 1,
-    authentication: false
+    isAuthentication: yield db.isAuthenticate()
   });
 });
 
@@ -53,15 +53,17 @@ app.get('/pocket/request_token', function *() {
     this.body = 'you have been authentecated';
   } else {
     requestToken = yield pocket.requestToken();
-
-    var url = pocket.authenticationPageUrl(requestToken);
-    this.body = url;
+    this.body = pocket.authenticationPageUrl(requestToken);
   }
 });
 
 app.get('/pocket/access_token', function *() {
-  var access_token = yield pocket.accessToken(requestToken);
-  this.body = access_token;
+  var obj = {
+    name: 'pocket',
+    accessToken: yield pocket.accessToken(requestToken)
+  };
+  yield db.pocketSave(obj);
+  this.body = 200;
 });
 
 app.listen(3000);
