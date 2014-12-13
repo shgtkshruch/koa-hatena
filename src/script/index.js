@@ -1,4 +1,4 @@
-require('./initRendering')();
+require('./renderingHandlebars')();
 
 var hbs = document.querySelector('.main');
 
