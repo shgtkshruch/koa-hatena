@@ -7,7 +7,9 @@ module.exports = function () {
     req.open('GET', '/pocket', true);
     req.onreadystatechange = function (e) {
       if (this.status === 200 && this.readyState === 4) {
-        console.log(this);
+        console.log(this.response);
+        var redirect_url = this.response;
+        // window.open(redirect_url);
       }
     };
     req.send();

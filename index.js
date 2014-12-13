@@ -7,6 +7,7 @@ var router = require('koa-router');
 var moment = require('./lib/moment');
 var db = require('./model/hatena');
 var hatena = require('./lib/hatena');
+var pocket = require('./lib/pocket');
 
 var render = views('views', {
   ext: 'jade'
@@ -50,9 +51,13 @@ app.get('/pocket', function *() {
   if (yield db.isAuthenticate()) {
     this.body = 'you have been authentecated';
   } else {
-    this.body = 'you have not been authentecated';
+    var endpoint = 'https://getpocket.com/auth/authorize?request_token=';
+    var redirect_uri = 'pocketapp1234:authorizationFinished';
+
+    var token = yield pocket.getToken();
+
+    this.body = endpoint + token + '&redirect_uri=' + redirect_uri;
   }
-  this.status = 200;
 
 });
 
