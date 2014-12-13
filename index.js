@@ -45,4 +45,15 @@ app.post('/bookmark', function *() {
   this.body = 200;
 });
 
+app.get('/pocket', function *() {
+
+  if (yield db.isAuthenticate()) {
+    this.body = 'you have been authentecated';
+  } else {
+    this.body = 'you have not been authentecated';
+  }
+  this.status = 200;
+
+});
+
 app.listen(3000);

@@ -41,6 +41,11 @@ module.exports = {
     yield bookmarks.remove(
         { date: { $lte: delTarget[0].date } }
     );
+  },
+
+  isAuthenticate: function *() {
+    var pocket = yield bookmarks.find({ name: 'pocket' });
+    return pocket.length === 1 ? true : false;
   }
 };
 
