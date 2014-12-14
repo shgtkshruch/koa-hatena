@@ -44,13 +44,20 @@ module.exports = {
     );
   },
 
-  pocketSave: function *(accessToken) {
-    yield pocket.insert(accessToken);
-  },
+  pocket: {
+    save: function *(accessToken) {
+      yield pocket.insert(accessToken);
+    },
 
-  isAuthenticate: function *() {
-    var res = yield pocket.find({ name: 'pocket' });
-    return res.length === 1 ? true : false;
+    isAuthenticate: function *() {
+      var res = yield pocket.find({ name: 'pocket' });
+      return res.length === 1 ? true : false;
+    },
+
+    accessToken: function *() {
+      var res = yield pocket.find({ name: 'pocket' });
+      return res[0].accessToken;
+    }
   }
 };
 

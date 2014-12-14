@@ -22,7 +22,7 @@ app.get('/', function *() {
   this.body = yield render('index', {
     now: moment.now(),
     db: newest.length === 1,
-    isAuthentication: yield db.isAuthenticate()
+    isAuthentication: yield db.pocket.isAuthenticate()
   });
 });
 
@@ -62,8 +62,21 @@ app.get('/pocket/access_token', function *() {
     name: 'pocket',
     accessToken: yield pocket.accessToken(requestToken)
   };
-  yield db.pocketSave(obj);
+  yield db.pocket.save(obj);
   this.body = 200;
+});
+
+app.post('/pocket', function *() {
+  this.status = yield pocket.save(this.get('url'));
+
+  switch (this.status) {
+    case 200:
+      this.body = 'Save item to pocket';
+      break;
+    case 500:
+      this.body = 'Faled to save item to pocket';
+      break;
+  }
 });
 
 app.listen(3000);

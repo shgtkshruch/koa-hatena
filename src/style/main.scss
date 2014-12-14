@@ -99,6 +99,9 @@ p {
 }
 
 .hb {
+  $width-count: 6em;
+  $width-pocket: 40px;
+
   position: relative;
   padding: 1.3em 0;
   background-color: #fff;
@@ -136,9 +139,10 @@ p {
     color: $color-link;
   }
   &__count {
+    float: left;
     font-size: 16px;
     font-weight: 100;
-    width: 6em;
+    width: $width-count;
     height: 2em;
     line-height: 2em;
     margin: 0;
@@ -152,6 +156,14 @@ p {
       font-size: 0.8em;
       margin-left: 0.3em;
     }
+  }
+  &__pocket {
+    float: left;
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    fill: #FC0036;
+    cursor: pointer;
   }
   &__thumb {
     float: left;
@@ -188,6 +200,7 @@ p {
     position: absolute;
     top: 0;
     right: 0;
+    width: calc(#{$width-count} + #{$width-pocket});
   }
 }
 
@@ -279,3 +292,4 @@ p {
     line-height: 1.4;
   }
 }
+

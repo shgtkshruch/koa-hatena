@@ -8,6 +8,8 @@ hbs.addEventListener('click', function (e) {
     require('./remove')(el);
   } else if (el.classList.contains('hb__count')) {
     require('./showComments')(el);
+  } else if (el.parentNode.classList.contains('hb__pocket')) {
+    require('./postPocket')(el.parentNode);
   } else {
     require('./showDescription')(el);
   }
