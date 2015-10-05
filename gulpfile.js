@@ -9,7 +9,7 @@ gulp.task('nodemon', function () {
   nodemon({
     script: 'index.js',
     execMap: {
-      js: "node --harmony"
+      js: "node"
     },
     watch: [
       "index.js",
